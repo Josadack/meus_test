@@ -2,7 +2,7 @@ import { IsNotEmpty, IsNumber } from "class-validator";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, JoinColumn } from "typeorm"; // Importe o JoinColumn  
 import { Categoria } from "../../categorias/entities/categoria.entity";  
 import { Usuario } from "../../usuarios/entities/usuario.entity";  
-import { ApiProperty } from "@nestjs/swagger";  
+import { ApiHideProperty, ApiProperty } from "@nestjs/swagger";  
 import { NumericTransformer } from "../../util/numericTransformer";  
 
 
@@ -34,21 +34,17 @@ export class Produto {
     info_nutricionais: string;  
 
 
-    // Relacionamento com Categoria  
+    // Relacionamento com Categoria
+    @ApiHideProperty()  
     @ManyToOne(() => Categoria, (categoria) => categoria.produto, {  
         onDelete: "CASCADE"
     })  
-    @JoinColumn({ name: 'categoriaId' }) // Adicione o JoinColumn aqui  
-    categoria: Categoria;  
-
-    @Column({ nullable: true }) // Permite que seja nulo caso não tenha categoria  
-    categoriaId: number;  
-
-
+  
     // Relacionamento com Usuario  
     @ApiProperty()   
     @ManyToOne (() => Usuario, (usuario) => usuario.produto, {  
         onDelete: "CASCADE"  
     })  
     usuario: Usuario;  
+    categoria: any;
 }  

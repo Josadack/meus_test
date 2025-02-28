@@ -25,5 +25,5 @@ export class Categoria{
     @ApiProperty() 
     @OneToMany(() => Produto, (produto) => produto.categoria)
     produto: Produto[];
-
+    //***** */
 }
