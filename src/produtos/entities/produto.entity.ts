@@ -35,16 +35,17 @@ export class Produto {
 
 
     // Relacionamento com Categoria
-    @ApiHideProperty()  
+    @ApiProperty({type: () => Categoria}) 
     @ManyToOne(() => Categoria, (categoria) => categoria.produto, {  
         onDelete: "CASCADE"
-    })  
+    }) 
+    categoria: Categoria; 
   
     // Relacionamento com Usuario  
-    @ApiProperty()   
+    @ApiProperty({type: () => Usuario})   
     @ManyToOne (() => Usuario, (usuario) => usuario.produto, {  
         onDelete: "CASCADE"  
     })  
     usuario: Usuario;  
-    categoria: any;
+
 }  
